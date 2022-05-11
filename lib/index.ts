@@ -28,7 +28,15 @@ export class AppStack extends Stack {
         REGION: this.region,
       },
       code: lambda.Code.fromInline(
-        `exports.handler = function(event, ctx, cb) {return {statusCode: 200, body: JSON.stringify({"region": process.env.REGION})}}`
+        `exports.handler = function(event, ctx, cb) {\n` +
+          `  console.log("function running...")` +
+          `  return cb(null, {\n` +
+          `    statusCode: 200,\n` +
+          `    body: JSON.stringify({\n` +
+          `      region: process.env.REGION\n` +
+          `    })\n` +
+          `  });\n` +
+          `};`
       ),
     });
     const lambdaRestApi = new apigateway.LambdaRestApi(this, "API", {
