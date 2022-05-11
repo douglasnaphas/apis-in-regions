@@ -33,9 +33,10 @@ export class AppStack extends Stack {
     });
     const lambdaRestApi = new apigateway.LambdaRestApi(this, "API", {
       handler: fn,
-      proxy: false
-    })
-    const api = 
-    new CfnOutput(this, "APIEndpoint" {value: lambdaRestApi.url})
+      proxy: false,
+    });
+    const api = new CfnOutput(this, "APIEndpoint", {
+      value: lambdaRestApi.url,
+    });
   }
 }
