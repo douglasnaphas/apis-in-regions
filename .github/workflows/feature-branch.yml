@@ -48,27 +48,14 @@ jobs:
           aws sts get-caller-identity
           echo ${AWS_DEFAULT_REGION} | sed 's/-/+/g'
 
-      - name: cdk version
-        run: |
-          npx aws-cdk --version
-          npx aws-cdk@latest --version
-          npx aws-cdk@2.9.0 --version
-          ls ~/.npm/_npx
-          node --version
-          npm --version
-          npx --version
-          npx cdk --version
-          npx cdk@latest --version
-          npx cdk@2.8.0 --version
-
-      - name: Deploy the app stack to dev account
+      - name: Deploy to the dev account
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "us-east-1"
         run: |
           npx cdk bootstrap
-          npx cdk deploy --require-approval never
+          npx cdk deploy --all --require-approval never
 
       - name: Run integration test (dev account)
         working-directory: itest
