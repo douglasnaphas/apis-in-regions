@@ -17,5 +17,15 @@ To deploy API Gateway APIs to multiple regions using this repo's single CDK app:
 ## Validate
 To validate that the multi-region deployment worked, go in your Actions CI output to the _Deploy to the test account_ step, and locate the two CloudFormation stack outputs (one for East, one for West) whose names end with _APIEndpoint_. Open each in a browser and observe that they announce different regions. You can verify in your AWS console that deployments happened in the desired regions.
 
+For the deployment associated with the `master` branch of douglasnaphas/apis-in-regions, in the test account, we have:
+
+```
+$ curl https://g5pa9bjh98.execute-api.us-east-1.amazonaws.com/prod/ && echo
+{"region":"us-east-1"}
+
+$ curl https://6h75xg0qh7.execute-api.us-west-1.amazonaws.com/prod/ && echo
+{"region":"us-west-1"}
+```
+
 ## Docs
 [These docs](https://docs.aws.amazon.com/cdk/v2/guide/stack_how_to_create_multiple_stacks.html) explain how to deploy multiple stacks from one CDK app.
