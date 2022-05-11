@@ -5,5 +5,12 @@ const stackname = require("@cdk-turnkey/stackname");
 
 (async () => {
   const app = new App();
-  new AppStack(app, stackname("East"), { env: { region: "us-east-1" } });
+  [
+    { stackId: "East", region: "us-east-1" },
+    { stackId: "West", region: "us-west-1" },
+  ].forEach((stackInfo) => {
+    new AppStack(app, stackname(stackInfo.stackId), {
+      env: { region: stackInfo.region },
+    });
+  });
 })();
