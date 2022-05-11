@@ -3,13 +3,9 @@ import { aws_s3 as s3 } from "aws-cdk-lib";
 import { aws_lambda as lambda } from "aws-cdk-lib";
 import { aws_apigateway as apigateway } from "aws-cdk-lib";
 
-export interface AppStackProps extends StackProps {
-  customProp?: string;
-}
 export class AppStack extends Stack {
-  constructor(scope: App, id: string, props: AppStackProps = {}) {
+  constructor(scope: App, id: string, props: StackProps = {}) {
     super(scope, id, props);
-    const { customProp } = props;
     const defaultBucketProps = {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
