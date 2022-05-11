@@ -29,7 +29,7 @@ export class AppStack extends Stack {
       },
       code: lambda.Code.fromInline(
         `exports.handler = function(event, ctx, cb) {\n` +
-          `  console.log("function running...")` +
+          `  console.log("function running...");\n` +
           `  return cb(null, {\n` +
           `    statusCode: 200,\n` +
           `    body: JSON.stringify({\n` +
