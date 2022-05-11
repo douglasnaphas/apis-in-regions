@@ -68,17 +68,7 @@ jobs:
           AWS_DEFAULT_REGION: "us-east-1"
         run: |
           npx cdk bootstrap
-          STACKNAME=$(npx @cdk-turnkey/stackname@1.2.0 --suffix app)
-          npx cdk deploy --require-approval never ${STACKNAME}
-
-      - name: Deploy content (dev account)
-        working-directory: content
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "us-east-1"
-        run: |
-          bash deploy-content.sh
+          npx cdk deploy --require-approval never
 
       - name: Run integration test (dev account)
         working-directory: itest

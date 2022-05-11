@@ -6,17 +6,6 @@ import { aws_apigateway as apigateway } from "aws-cdk-lib";
 export class AppStack extends Stack {
   constructor(scope: App, id: string, props: StackProps = {}) {
     super(scope, id, props);
-    const defaultBucketProps = {
-      removalPolicy: RemovalPolicy.DESTROY,
-      autoDeleteObjects: true,
-    };
-    const bucket = new s3.Bucket(this, "Bucket", {
-      ...defaultBucketProps,
-      versioned: true,
-    });
-    new CfnOutput(this, "BucketName", {
-      value: bucket.bucketName,
-    });
     const fn = new lambda.Function(this, "Function", {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: "index.handler",
